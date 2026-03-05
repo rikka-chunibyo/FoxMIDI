@@ -1,0 +1,16 @@
+# Build
+build/out/FoxMIDI.exe
+build/cache/
+release/FoxMIDI.zip
+
+# Config
+config.json
+
+# Python
+__pycache__
+
+# IDE
+.vscode
+
+# Git
+.git

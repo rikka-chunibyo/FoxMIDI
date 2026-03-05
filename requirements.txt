@@ -1,0 +1,10 @@
+# pyinstaller
+mido
+python-rtmidi
+pyautogui
+keyboard
+comtypes
+pycaw==20181226
+pystray
+pillow
+pywin32
