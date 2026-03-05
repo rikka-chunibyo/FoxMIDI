@@ -15,7 +15,7 @@ pyinstaller --onefile --windowed ^
     --paths "%CD%\src" ^
     --workpath build\cache\build ^
     --specpath build\cache ^
-    --distpath build\out ^
+    --distpath release ^
     --name FoxMIDI ^
     --hidden-import=rtmidi ^
     --hidden-import=mido.backends.rtmidi ^
@@ -24,10 +24,5 @@ pyinstaller --onefile --windowed ^
     main.py
 
 if %errorlevel% neq 0 exit /b %errorlevel%
-
-echo Zipping...
-if not exist release mkdir release
-powershell -Command "Compress-Archive -Path 'build\out\*' -DestinationPath 'release\FoxMIDI.zip' -Force"
-echo Done. release\FoxMIDI.zip ready.
-
+echo Done. release\FoxMIDI.exe ready.
 pause

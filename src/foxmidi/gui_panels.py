@@ -754,13 +754,14 @@ class SettingsPage(tk.Frame):
         run_card = tk.Frame(wrap, bg=C["card"], padx=16, pady=14)
         run_card.pack(fill="x", pady=(4, 20))
         info = (
-            "  main.py is the single entry point. It starts the engine,\n"
-            "  the system tray icon, and this GUI.\n\n"
             "  Left-click the tray icon to open this window.\n"
             "  Right-click for enable/disable, MIDI Monitor, and Exit.\n\n"
-            "    pythonw main.py             ← open GUI (no console window)\n"
-            "    python  main.py             ← open GUI with console\n"
-            "    pythonw main.py --silent    ← start in background, no GUI"
+            "  Script:\n"
+            "    python main.py              ← open GUI\n"
+            "    pythonw main.py --silent    ← start in background, no GUI\n\n"
+            "  Executable:\n"
+            "    FoxMIDI.exe                 ← open GUI (no console window)\n"
+            "    FoxMIDI.exe --silent        ← start in background, no GUI"
         )
         tk.Label(run_card, text=info, bg=C["card"], fg=C["text"],
                  font=("Consolas", 9), justify="left").pack(anchor="w")
