@@ -61,7 +61,7 @@ def create_start_menu_shortcut() -> str:
             r"Microsoft\Windows\Start Menu\Programs"
         )
         lnk = os.path.join(folder, "FoxMIDI.lnk")
-        _write_shortcut(lnk, "--gui", "FoxMIDI")
+        _write_shortcut(lnk, "", "FoxMIDI")
         return "Start Menu shortcut created."
     except Exception as e:
         return f"Failed: {e}"
@@ -74,7 +74,7 @@ def create_startup_shortcut() -> str:
             r"Microsoft\Windows\Start Menu\Programs\Startup"
         )
         lnk = os.path.join(folder, "FoxMIDI.lnk")
-        _write_shortcut(lnk, "", "FoxMIDI – run on login")
+        _write_shortcut(lnk, "--silent", "FoxMIDI – run on login")
         return "Startup shortcut created."
     except Exception as e:
         return f"Failed: {e}"

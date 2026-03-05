@@ -3,14 +3,13 @@ main.py  —  FoxMIDI
 Single entry point. Starts the MIDI engine, system tray icon, and GUI.
 
 Usage:
-    pythonw main.py             ← silent background mode (no console window)
-    python  main.py             ← background mode with console
-    python  main.py --gui       ← open GUI immediately on start
-    python  main.py --console   ← print MIDI activity to stdout
+    python  main.py             ← start with GUI open
+    pythonw main.py             ← start with GUI open (no console window)
+    pythonw main.py --silent    ← start in background, no GUI window
 
 If an instance is already running:
-    python  main.py             ← exits immediately, does nothing
-    python  main.py --gui       ← tells the running instance to show its GUI, then exits
+    python  main.py             ← tells the running instance to show its GUI, then exits
+    python  main.py --silent    ← exits immediately, does nothing
 """
 import sys
 import argparse
@@ -53,17 +52,15 @@ def _watch_signal_file(app):
 
 def main():
     parser = argparse.ArgumentParser(description="FoxMIDI")
-    parser.add_argument("--gui",     action="store_true", help="Show GUI on start")
-    parser.add_argument("--console", action="store_true", help="Log MIDI to stdout")
+    parser.add_argument("--silent", action="store_true", help="Start in background without opening GUI")
     args = parser.parse_args()
 
     _mutex_handle, already_running = _create_mutex()
 
     if already_running:
-        print("FoxMIDI already running")
-        if args.gui:
-            print("Opening window...")
+        if not args.silent:
             # Signal the running instance to show its window
+            print("FoxMIDI already running — opening window...")
             try:
                 with open(SIGNAL_FILE, "w") as f:
                     f.write("show")
@@ -71,12 +68,8 @@ def main():
                 pass
         sys.exit(0)
 
-    # We are the first (and only) instance from here on.
-    if args.console:
-        logging.basicConfig(level=logging.INFO, format="[%(name)s] %(message)s")
-
     from foxmidi.gui import App
-    app = App(start_hidden=not args.gui)
+    app = App(start_hidden=args.silent)
     _watch_signal_file(app)
     app.run()
 

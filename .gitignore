@@ -1,7 +1,6 @@
 # Build
-build/out/FoxMIDI.exe
-build/cache/
-release/FoxMIDI.zip
+build
+release
 
 # Config
 config.json

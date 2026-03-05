@@ -1,4 +1,14 @@
 @echo off
+where pyinstaller >nul 2>&1
+if %errorlevel% neq 0 (
+    echo PyInstaller not found. Installing...
+    pip install pyinstaller
+    if %errorlevel% neq 0 (
+        echo Failed to install PyInstaller. Exiting.
+        exit /b 1
+    )
+)
+
 pyinstaller --onefile --windowed ^
     --icon="%CD%\assets\foxmidi.ico" ^
     --add-data "%CD%\assets;assets" ^
